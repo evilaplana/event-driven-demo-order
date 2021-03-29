@@ -1,0 +1,42 @@
+server:
+  servlet:
+    context-path: /order-manager
+  port: 8082
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: event-driven-order
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/order-manager?serverTimezone=UTC
+    username: root
+    password: password
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+
+  flyway:
+    enabled: true
+    location: classpath:db/migration
+    driver: com.mysql.cj.jdbc.Driver
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    schemas: order-manager
+    sql-migration-prefix: V
+    initialVersion: =0.1
+  output:
+    ansi:
+      enabled: detect
+
+  cloud:
+    stream:
+      bindings:
+        processClientStatusMessage-in-0:
+          destination: client-status-queue
+        processPlaceOrderMessage-out-0:
+          destination: place-order-queue
+      function:
+        definition: processPlaceOrderMessage
