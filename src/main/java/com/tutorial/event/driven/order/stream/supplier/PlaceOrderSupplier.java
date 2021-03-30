@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class PlaceOrderSupplier {
 
-  @Value("${spring.cloud.stream.bindings.processPlaceOrderCommand-out-0.destination}")
+  @Value("${spring.cloud.stream.bindings.processPlaceOrderMessage-out-0.destination}")
   private String placeOrderQueue;
 
   @Autowired private StreamBridge streamBridge;

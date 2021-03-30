@@ -39,4 +39,4 @@ spring:
         processPlaceOrderMessage-out-0:
           destination: place-order-queue
       function:
-        definition: processPlaceOrderMessage
+        definition: processClientStatusMessage

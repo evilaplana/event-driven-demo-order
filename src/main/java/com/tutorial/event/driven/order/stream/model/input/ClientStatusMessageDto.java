@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class ClientStatusMessageDto {
 
-  private Long clientId;
+  private Integer orderId;
+  private Integer clientId;
   private String clientStatus;
 }
